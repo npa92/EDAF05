@@ -132,7 +132,6 @@ public class StableMarriage {
 				try {
 					pw = new PrintWriter(newFile);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		for (int i = 0; i < wife.length; i++) {
