@@ -108,8 +108,6 @@ public class StableMarriage {
 					int affair = 0;
 					for (int i = 0; i < currentWList.size(); i++) {
 
-						/** Ändrade här till Integer.toString */
-
 						if (husband[currentWomanID / 2 - 1] == currentWList.get(i)) {
 							marriage = i;
 						}
