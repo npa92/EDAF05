@@ -2,6 +2,7 @@ package lab1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -15,6 +16,7 @@ public class StableMarriage {
 	String[] names;
 	int[] wife;
 	int[] husband;
+	private PrintWriter pw;
 
 	public StableMarriage() {
 
@@ -68,7 +70,6 @@ public class StableMarriage {
 						menPref[sex2 / 2] = new LinkedList<Integer>();
 						s = s.substring(s.lastIndexOf(":") + 1, s.length());
 						s = s.substring(1, s.length());
-						System.out.println(s);
 						String[] splits = s.split(" ");
 						freeMen.add(sex2);
 						for (int j = 0; j < n; j++) {
@@ -95,19 +96,16 @@ public class StableMarriage {
 		while (!freeMen.isEmpty()) {
 			int currentManID = freeMen.poll();
 			LinkedList<Integer> currentList = menPref[currentManID / 2];
-			System.out.println(currentList.toString());
 			while (!currentList.isEmpty()) {
 				int currentWomanID = currentList.poll();
 				if (husband[currentWomanID / 2 - 1] == 0) {
 					wife[currentManID / 2] = currentWomanID;
 					husband[currentWomanID / 2 - 1] = currentManID;
-					System.out.println(husband[currentWomanID / 2 - 1] + " gifter sig med " + wife[currentManID / 2]);
 					break;
 				} else {
 					LinkedList<Integer> currentWList = womenPref[currentWomanID / 2 - 1];
 					int marriage = 0;
 					int affair = 0;
-					System.out.println("Vem är " + currentWomanID + "'s man? " + husband[currentWomanID / 2 - 1]);
 					for (int i = 0; i < currentWList.size(); i++) {
 
 						/** Ändrade här till Integer.toString */
@@ -119,38 +117,38 @@ public class StableMarriage {
 							affair = i;
 						}
 					}
-					System.out.println(marriage + " " + affair);
 					if (marriage > affair) {
 						int lonely = husband[currentWomanID / 2 - 1]; // / 2 -1
 																		// ?
 						wife[lonely / 2] = 0;
 						wife[currentManID / 2] = currentWomanID;
 						husband[currentWomanID / 2 - 1] = currentManID;
-						System.out.println("Lägger in " + (lonely) + " i freeMen");
+//						System.out.println("Lägger in " + (lonely) + " i freeMen");
 						freeMen.add(lonely);
-						System.out
-								.println(husband[currentWomanID / 2 - 1] + " gifter sig med " + wife[currentManID / 2]);
-
 						break;
 					}
-
-					// System.out.println("ACCPETERADE EJ OMGIFTE " +
-					// husband[currentWomanID / 2 - 1]
-					// + " WILL NEVER HAPPEN " + wife[currentManID / 2]);
-					break;
 				}
 			}
 		}
+		File newFile = new File("results.txt");
+				try {
+					pw = new PrintWriter(newFile);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		for (int i = 0; i < wife.length; i++) {
-			System.out.println(wife[2]);
-			int man = husband[(wife[i]-1) /2];
-			System.out.println(names[man] + " -- " + names[wife[i]-1]);
+			int woman = wife[i];
+//			System.out.println(names[i*2] + " -- " + names[woman-1]);
+			pw.println(names[i*2] + " -- " + names[woman-1]);
 		}
+		pw.close();
 	}
 
+	
 	public static void main(String[] args) throws URISyntaxException {
 		StableMarriage sb = new StableMarriage();
-		URL url = StableMarriage.class.getResource("sm-friends-in.txt");
+		URL url = StableMarriage.class.getResource("sm-random-500-in.txt");
 		File file = new File(url.toURI());
 		sb.read(file);
 		sb.algorithm();
