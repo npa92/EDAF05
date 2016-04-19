@@ -2,22 +2,14 @@ package lab4;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.RoundingMode;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
 public class CPP {
 
 	private Scanner scanner;
-	private Map<String, Point> points;
 	private List<Point> pXPoint;
 	private List<Point> pYPoint;
 
@@ -25,7 +17,6 @@ public class CPP {
 	}
 
 	public void readFile(File file) {
-		points = new HashMap<String, Point>();
 		String s, name = "";
 		String fileName = "";
 		pXPoint = new ArrayList<Point>();
@@ -54,7 +45,6 @@ public class CPP {
 			name = split[0];
 			double xCoord = Double.parseDouble(split[1]);
 			double yCoord = Double.parseDouble(split[2]);
-			points.put(name, new Point(xCoord, yCoord));
 			pXPoint.add(new Point(xCoord, yCoord));
 			pYPoint.add(new Point(xCoord, yCoord));
 			i++;
