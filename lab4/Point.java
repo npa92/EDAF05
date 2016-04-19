@@ -57,11 +57,6 @@ public class Point implements Comparable<Point>, Comparator<Point> {
 		} else {
 			return 0;
 		}	
-//		} else if ((other.y == this.y) && (other.x == this.x)) {
-//			return 0;
-//		} else {
-//			return 1;
-//		}
 	}
 	
 	//Compare används för att sortera över x-coord.
