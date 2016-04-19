@@ -116,7 +116,7 @@ public class CPP {
 	}
 
 	public void readAllFiles() {
-		File folder = new File("C:/Users/Petter/Downloads/lab4");
+		File folder = new File("C:/[Your filepath]");
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 			if (file.isFile() && file.getName().contains("tsp")) {
@@ -146,9 +146,6 @@ public class CPP {
 		CPP c = new CPP();
 		long time = System.currentTimeMillis();
 		c.readAllFiles();
-//		URL url = CPP.class.getResource("ulysses22.tsp");
-//		File file = new File(url.toURI());
-//		c.readFile(file);
 		System.out.println("Tog " + (System.currentTimeMillis() - time) + " millisekunder.");
 	}
 }
